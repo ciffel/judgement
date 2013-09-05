@@ -1,0 +1,24 @@
+<h1 class="page-header">Submit</h1>
+<%= simple_form_for [@problem, @submission], html: { class: "form-horizontal" } do |f| %>
+  <div class="form-group">
+    <label class="col-lg-2 control-label">Problem</label>
+    <div class="col-lg-10">
+      <p class="form-control-static"><%= @problem.title %></p>
+    </div>
+  </div>
+  <%= f.input :code_content, as: :text, label: 'Paste your code...',
+    wrapper_html: { class: "form-group" },
+    label_html: { class: "col-lg-2" },
+    input_html: { class: "col-lg-5", rows: "12" } %>
+  <%= f.input :code_file, as: :file, label: '...or upload it',
+    wrapper_html: { class: "form-group" },
+    label_html: { class: "col-lg-2" },
+    input_html: { class: "col-lg-5", rows: "12" } %>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+      <%= link_to "Back", :back, class: "btn btn-default" %>
+    </div>
+  </div>
+<% end %>
+

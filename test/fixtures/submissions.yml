@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  problem_id: 1
+  user_id: 1
+  ip: MyString
+  code: MyString
+  time_cost: 1
+  status: MyString
+  msg: MyText
+
+two:
+  problem_id: 1
+  user_id: 1
+  ip: MyString
+  code: MyString
+  time_cost: 1
+  status: MyString
+  msg: MyText

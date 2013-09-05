@@ -1,0 +1,27 @@
+<h1 class="page-header">Submissions</h1>
+<% if @submissions.any? %>
+<table class="table submission-list">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Problem</th>
+      <th>Verdict</th>
+      <th>Run Time</th>
+      <th>Submission Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @submissions.each do |s| %>
+    <tr>
+      <td><%= s.id %></td>
+      <td><%= link_to(s.problem.title, problem_path(s.problem)) %></td>
+      <td><%= s.status.upcase %></td>
+      <td><%= s.time_cost %></td>
+      <td><%= s.created_at %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+<p>No submissions</p>
+<% end %>

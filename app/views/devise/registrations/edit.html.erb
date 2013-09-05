@@ -1,0 +1,10 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<%= simple_form_for(resource, url: registration_path(resource_name)) do |f| %>
+  <%= f.input :email %>
+  <%= f.input :password, hint: "(leave blank if you don't want to change it)" %>
+  <%= f.input :password_confirmation %>
+  <%= f.input :current_password, hint: "we need your current password to confirm your changes" %>
+  <%= link_to "Back", :back, class: "btn btn-default" %>
+  <%= f.button :submit, class: "btn-primary" %>
+<% end %>
+
