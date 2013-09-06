@@ -28,17 +28,15 @@ class SubmissionsController < ApplicationController
     if @submission.save
       dest_path = File.join(Settings.sources_storage_path, "#{@submission.code}.c")
       tmp_file = params[:submission][:code_file]
-      begin
-        if tmp_file
-          FileUtils.cp(params[:submission][:code_file].path, dest_path)
-        else
-          File.open(dest, 'w') do |f|
-            f.write(params[:submission][:code_content])
-          end
+      if tmp_file
+        FileUtils.cp(params[:submission][:code_file].path, dest_path)
+      else
+        File.open(dest, 'w') do |f|
+          f.write(params[:submission][:code_content])
         end
-      ensure
-        tmp_file.close if tmp_file
       end
+      Resque.enqueue(JudgeTask, @submission.id)
+      redirect_to submissions_path
     else
       redirect_to new_problem_submission_path(@problem), alert: 'Please try again'
     end

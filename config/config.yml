@@ -1,8 +1,9 @@
 defaults: &defaults
-  sources_storage_path: '/tmp'
-  problems_path: '/tmp/problems'
-  taker_path: '/usr/bin/taker'
-  compiler_options: '-lm -fno-asm -ansi -DONLINE_JUDGE -O2'
+  sources_storage_path: /tmp
+  problems_path: /tmp/problems
+  sandbox_path: /usr/bin/taker
+  exec_pool: /tmp
+  compiler_options: '-lm -fno-asm -ansi -DONLINE_JUDGE -O2 -static'
 
 development:
   <<: *defaults

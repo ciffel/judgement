@@ -46,6 +46,7 @@ gem "resque", "~> 2.0.0.pre.1", github: "resque/resque"
 
 group :development do
   gem 'pry'
+  gem 'pry-rails'
   gem 'capistrano', :require => false
   gem 'capistrano-unicorn', :require => false
 end
