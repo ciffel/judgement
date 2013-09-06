@@ -49,6 +49,7 @@ group :development do
   gem 'pry-rails'
   gem 'capistrano', :require => false
   gem 'capistrano-unicorn', :require => false
+  gem "capistrano-resque", "~> 0.1.0", :require => false
 end
 
 group :production do
