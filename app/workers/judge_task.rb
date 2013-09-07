@@ -4,12 +4,14 @@ class JudgeTask
   def self.perform(id)
     submission = Submission.find(id)
     code = submission.code
+    log = Logger.new 'log/resque.log'
 
     Dir.chdir(Settings.exec_pool)
     compile_output = `gcc #{submission.source_path} -o #{submission.exec_path} #{Settings.compiler_options} 2>&1`
     if $?.success?
       problem = submission.problem
-      exec_output = `#{Settings.sandbox_path} -t #{problem.time_limit} -m #{problem.mem_limit} -i #{problem.input_path} #{submission.exec_path}`.split("\n")
+      log.debug "#{compile_output} | #{Settings.sandbox_path} -t #{problem.time_limit} -m #{problem.mem_limit} #{submission.exec_path} <#{problem.input_path}"
+      exec_output = `#{Settings.sandbox_path} -t #{problem.time_limit} -m #{problem.mem_limit} #{submission.exec_path} <#{problem.input_path}`.split("\n")
       FileUtils.rm_f(submission.exec_path)
       msg = exec_output.pop
       case msg
