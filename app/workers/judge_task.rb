@@ -5,6 +5,7 @@ class JudgeTask
     submission = Submission.find(id)
     code = submission.code
 
+    Dir.chdir(Settings.exec_pool)
     compile_output = `gcc #{submission.source_path} -o #{submission.exec_path} #{Settings.compiler_options} 2>&1`
     if $?.success?
       problem = submission.problem
@@ -15,8 +16,6 @@ class JudgeTask
       when /(\d+) (\d+) (\d+)/
         submission.time_cost = $2.to_i
         submission.status = self.output_eql?(exec_output, problem.ans_path) ? :ac : :wa;
-      when 'Program Killed'
-        submission.status = :re
       when 'Time Limit Exceeded'
         submission.status = :tle
         submission.msg = msg
