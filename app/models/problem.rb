@@ -4,4 +4,8 @@ class Problem < ActiveRecord::Base
   def ans_path
     "#{Settings.problems_path}/#{self.id}/out"
   end
+
+  def input_path
+    "#{Settings.problems_path}/#{self.id}/in"
+  end
 end

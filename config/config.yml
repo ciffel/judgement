@@ -13,3 +13,7 @@ test:
 
 production:
   <<: *defaults
+  sources_storage_path: /var/judgeman/sources
+  problems_path: /var/judgeman/problems
+  sandbox_path: /usr/bin/taker
+  exec_pool: /var/judgeman/tmp

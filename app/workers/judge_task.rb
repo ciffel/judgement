@@ -7,13 +7,14 @@ class JudgeTask
 
     compile_output = `gcc #{submission.source_path} -o #{submission.exec_path} #{Settings.compiler_options} 2>&1`
     if $?.success?
-      exec_output = `#{Settings.sandbox_path} #{submission.exec_path}`.split("\n")
+      problem = submission.problem
+      exec_output = `#{Settings.sandbox_path} -t #{problem.time_limit} -m #{problem.mem_limit} -i #{problem.input_path} #{submission.exec_path}`.split("\n")
       FileUtils.rm_f(submission.exec_path)
       msg = exec_output.pop
       case msg
       when /(\d+) (\d+) (\d+)/
         submission.time_cost = $2.to_i
-        submission.status = self.output_eql?(exec_output, submission.problem.ans_path) ? :ac : :wa;
+        submission.status = self.output_eql?(exec_output, problem.ans_path) ? :ac : :wa;
       when 'Program Killed'
         submission.status = :re
       when 'Time Limit Exceeded'
@@ -41,7 +42,6 @@ class JudgeTask
     a.pop if a[-1].empty?
     b = IO.readlines(ans_path).map { |s| s.strip }
     b.pop if b[-1].empty?
-    binding.pry
     a == b
   end
 
