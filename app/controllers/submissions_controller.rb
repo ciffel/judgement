@@ -31,7 +31,7 @@ class SubmissionsController < ApplicationController
       if tmp_file
         FileUtils.cp(params[:submission][:code_file].path, dest_path)
       else
-        File.open(dest, 'w') do |f|
+        File.open(dest_path, 'w') do |f|
           f.write(params[:submission][:code_content])
         end
       end
