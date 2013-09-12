@@ -1,2 +1,28 @@
-<h1>Submissions#show</h1>
-<p>Find me in app/views/submissions/show.html.erb</p>
+<h1 class="page-header">Submissions #<%= @submission.id %></h1>
+<div class="submission-info">
+  <div class="row">
+    <div class="col-lg-2">Date</div>
+    <div class="col-lg-10"><%= @submission.created_at %></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-2">Verdict</div>
+    <div class="col-lg-10"><%= @submission.status %></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-2">Time Cost</div>
+    <div class="col-lg-10"><%= @submission.time_cost %></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-2">Message</div>
+    <div class="col-lg-10"><%= @submission.msg %></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-2">Source Code</div>
+
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+        <%= raw(CodeRay.highlight_file(@submission.source_path)) %>
+    </div>
+  </div>
+</div>

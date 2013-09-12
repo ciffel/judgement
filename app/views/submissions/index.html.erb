@@ -13,7 +13,7 @@
   <tbody>
     <% @submissions.each do |s| %>
     <tr>
-      <td><%= s.id %></td>
+      <td><%= link_to(s.id, submission_path(s)) %></td>
       <td><%= link_to(s.problem.title, problem_path(s.problem)) %></td>
       <td><%= s.status.upcase %></td>
       <td><%= s.time_cost %></td>
