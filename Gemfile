@@ -43,6 +43,7 @@ gem 'redcarpet'
 gem 'coderay'
 gem 'settingslogic'
 gem "resque", "~> 2.0.0.pre.1", github: "resque/resque"
+gem 'will_paginate'
 
 group :development do
   gem 'pry'

@@ -1,4 +1,4 @@
-<h1 class="page-header">Submissions</h1>
+<h1>Submissions</h1>
 <% if @submissions.any? %>
 <table class="table submission-list">
   <thead>
@@ -22,6 +22,7 @@
     <% end %>
   </tbody>
 </table>
+<%= will_paginate @submissions %>
 <% else %>
 <p>No submissions</p>
 <% end %>

@@ -1,10 +1,11 @@
 class Submission < ActiveRecord::Base
   extend Enumerize
+  enumerize :status, in: [:waiting, :ac, :wa, :ce, :tle, :re]
 
   belongs_to :problem
   belongs_to :user
 
-  enumerize :status, in: [:waiting, :ac, :wa, :ce, :tle, :re]
+  self.per_page = 10
 
   attr_accessor :code_content, :code_file
 

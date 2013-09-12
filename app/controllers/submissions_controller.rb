@@ -5,7 +5,7 @@ class SubmissionsController < ApplicationController
 
 
   def index
-    @submissions = current_user.submissions.order('id DESC')
+    @submissions = current_user.submissions.page(params[:page]).order('id DESC')
   end
 
   def show
