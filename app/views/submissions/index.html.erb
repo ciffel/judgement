@@ -15,7 +15,7 @@
     <tr>
       <td><%= link_to(s.id, submission_path(s)) %></td>
       <td><%= link_to(s.problem.title, problem_path(s.problem)) %></td>
-      <td><%= s.status.upcase %></td>
+      <%= verdict_tag(s.status) %>
       <td><%= s.time_cost %></td>
       <td><%= s.created_at.strftime('%Y/%m/%d %H:%M:%S') %></td>
     </tr>

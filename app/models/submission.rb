@@ -19,4 +19,22 @@ class Submission < ActiveRecord::Base
   def out_path
     "#{Settings.exec_pool}/#{code}.out"
   end
+
+  def friendly_status
+    case status
+    when 'waiting'
+      'Waiting'
+    when 'ac'
+      'Accepted'
+    when 'wa'
+      'Wrong Answer'
+    when 'ce'
+      'Compile Error'
+    when 'tle'
+      'Time Limit Exceeded'
+    when 're'
+      'Runtime Error'
+    end
+  end
+
 end

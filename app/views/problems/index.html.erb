@@ -10,10 +10,10 @@
   </thead>
   <tbody>
     <% @problems.each do |p| %>
-    <tr>
+    <tr class="<%= 'alert-success' if p.passed?(current_user) %>">
       <td><%= p.id %></td>
       <td><%= link_to(p.title, problem_path(p)) %></td>
-      <td></td>
+      <td><%= 'Pass' if p.passed?(current_user) %></td>
     </tr>
     <% end %>
   </tbody>
