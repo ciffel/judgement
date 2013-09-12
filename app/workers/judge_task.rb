@@ -6,18 +6,16 @@ class JudgeTask
     code = submission.code
     log = Logger.new 'log/resque.log'
 
-    Dir.chdir(Settings.exec_pool)
     compile_output = `gcc #{submission.source_path} -o #{submission.exec_path} #{Settings.compiler_options} 2>&1`
     if $?.success?
       problem = submission.problem
-      log.debug "#{compile_output} | #{Settings.sandbox_path} -t #{problem.time_limit} -m #{problem.mem_limit} #{submission.exec_path} <#{problem.input_path}"
-      exec_output = `#{Settings.sandbox_path} -t #{problem.time_limit} -m #{problem.mem_limit} #{submission.exec_path} <#{problem.input_path}`.split("\n")
-      FileUtils.rm_f(submission.exec_path)
-      msg = exec_output.pop
+      log.debug "#{submission.id} | #{compile_output} | #{Settings.sandbox_path} -t #{problem.time_limit} -m #{problem.mem_limit} #{submission.exec_path}"
+      msg = `#{Settings.sandbox_path} -i #{problem.input_path} -o #{submission.out_path} -t #{problem.time_limit} -m #{problem.mem_limit} #{submission.exec_path}`
+
       case msg
       when /(\d+) (\d+) (\d+)/
         submission.time_cost = $2.to_i
-        submission.status = self.output_eql?(exec_output, problem.ans_path) ? :ac : :wa;
+        submission.status = self.output_eql?(submission.out_path, problem.ans_path) ? :ac : :wa;
       when 'Time Limit Exceeded'
         submission.status = :tle
         submission.msg = msg
@@ -28,6 +26,9 @@ class JudgeTask
         submission.status = :re
         submission.msg = msg
       end
+
+      FileUtils.rm_f(submission.exec_path)
+      FileUtils.rm_f(submission.out_path)
     else
       submission.status = :ce
       submission.msg = compile_output
@@ -39,10 +40,8 @@ class JudgeTask
   private
 
   def self.output_eql?(exec_out, ans_path)
-    a = exec_out.map { |s| s.strip }
-    a.pop if a[-1].empty?
+    a = IO.readlines(exec_out).map { |s| s.strip }
     b = IO.readlines(ans_path).map { |s| s.strip }
-    b.pop if b[-1].empty?
     a == b
   end
 

@@ -13,7 +13,10 @@ class Submission < ActiveRecord::Base
   end
 
   def exec_path
-    # "#{Settings.exec_pool}/#{code}"
-    code
+    "#{Settings.exec_pool}/#{code}"
+  end
+
+  def out_path
+    "#{Settings.exec_pool}/#{code}.out"
   end
 end
