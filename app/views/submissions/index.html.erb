@@ -22,7 +22,7 @@
     <% end %>
   </tbody>
 </table>
-<%= will_paginate @submissions %>
+<%= will_paginate @submissions, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
 <% else %>
 <p>No submissions</p>
 <% end %>

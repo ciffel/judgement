@@ -44,6 +44,7 @@ gem 'coderay'
 gem 'settingslogic'
 gem "resque", "~> 2.0.0.pre.1", github: "resque/resque"
 gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 
 group :development do
   gem 'pry'
