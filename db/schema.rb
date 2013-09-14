@@ -11,15 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130907163622) do
+ActiveRecord::Schema.define(version: 20130914163237) do
 
   create_table "problems", force: true do |t|
     t.string   "title"
     t.text     "description"
-    t.integer  "time_limit"
-    t.integer  "mem_limit"
+    t.integer  "time_limit",  default: 4000
+    t.integer  "mem_limit",   default: 131072
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "visible",     default: true
   end
 
   create_table "submissions", force: true do |t|

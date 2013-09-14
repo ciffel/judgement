@@ -1,6 +1,8 @@
 class Problem < ActiveRecord::Base
   has_many :submissions
 
+  validates :title, presence: true
+
   def ans_path
     "#{Settings.problems_path}/#{self.id}/out"
   end

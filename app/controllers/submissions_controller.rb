@@ -16,8 +16,10 @@ class SubmissionsController < ApplicationController
   end
 
   def create
-    if params[:submission][:code_file].nil? && params[:submission][:code_content].nil?
-      redirect_to new_problem_submission_path(@problem), alert: 'Please submit your code'
+    if params[:submission][:code_file].nil? && params[:submission][:code_content].empty?
+      flash[:danger] = 'Please submit your code'
+      redirect_to new_problem_submission_path(@problem)
+      return
     end
     @submission = @problem.submissions.build do |s|
       s.user = current_user
@@ -27,13 +29,12 @@ class SubmissionsController < ApplicationController
     end
     if @submission.save
       dest_path = File.join(Settings.sources_storage_path, "#{@submission.code}.c")
-      tmp_file = params[:submission][:code_file]
-      if tmp_file
-        FileUtils.cp(params[:submission][:code_file].path, dest_path)
-      else
+      if not params[:submission][:code_content].empty?
         File.open(dest_path, 'w') do |f|
           f.write(params[:submission][:code_content])
         end
+      else
+        FileUtils.cp(params[:submission][:code_file].path, dest_path)
       end
       Resque.enqueue(JudgeTask, @submission.id)
       redirect_to submissions_path

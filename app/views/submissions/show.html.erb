@@ -22,7 +22,9 @@
   </div>
   <div class="row">
     <div class="col-lg-2">Message</div>
-    <div class="col-lg-10"><%= @submission.msg %></div>
+    <div class="col-lg-10">
+      <%= content_tag(:pre, @submission.msg) unless @submission.msg.nil? %>
+    </div>
   </div>
   <div class="row">
     <div class="col-lg-2">Source Code</div>
