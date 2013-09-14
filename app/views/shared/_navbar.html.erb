@@ -14,19 +14,19 @@
       li << link_to('Submissions', submissions_path)
     end %>
     <ul class="nav navbar-nav navbar-right">
+      <% if user_signed_in? %>
       <li clas="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cog"></i> <i class="icon-caret-down"></i></a>
         <%= render_list :class => "dropdown-menu" do |li|
-          if user_signed_in?
             li << link_to(current_user.student_id, "#")
             li << ['', class: "divider"]
             li << link_to(t("menu.settings"), edit_user_registration_path)
             li << link_to(t("menu.signout"), destroy_user_session_path, method: :delete)
-          else
-            li << link_to(t("menu.signin"), new_user_session_path)
-          end
         end %>
       </li>
+      <% else %>
+      <li><%= link_to(t("menu.signin"), new_user_session_path) %></li>
+      <% end %>
     </ul>
   </div>
 </nav>

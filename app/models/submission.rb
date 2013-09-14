@@ -6,7 +6,7 @@ class Submission < ActiveRecord::Base
   belongs_to :problem
   belongs_to :user
 
-  self.per_page = 10
+  self.per_page = 16
 
   attr_accessor :code_content, :code_file
 

@@ -9,7 +9,7 @@ class JudgeTask
     compile_output = `gcc #{submission.source_path} -o #{submission.exec_path} #{Settings.compiler_options} 2>&1`
     if $?.success?
       problem = submission.problem
-      log.debug "#{submission.id} | #{compile_output} | #{Settings.sandbox_path} -t #{problem.time_limit} -m #{problem.mem_limit} #{submission.exec_path}"
+      log.debug "#{submission.id} | #{compile_output}"
       msg = `#{Settings.sandbox_path} -i #{problem.input_path} -o #{submission.out_path} -t #{problem.time_limit} -m #{problem.mem_limit} #{submission.exec_path}`
 
       case msg
@@ -31,7 +31,7 @@ class JudgeTask
       FileUtils.rm_f(submission.out_path)
     else
       submission.status = :ce
-      submission.msg = compile_output
+      submission.msg = compile_output.gsub(submission.source_path, 'Your code')
     end
 
     submission.save
