@@ -1,0 +1,20 @@
+.devise-page {
+  max-width: 330px;
+  margin: 0 auto;
+
+  .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .remember-me {
+    margin-top: 10px;
+  }
+
+  .btn-block {
+    margin: 10px auto;
+  }
+}
