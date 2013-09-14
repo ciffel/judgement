@@ -1,4 +1,5 @@
 class Submission < ActiveRecord::Base
+  scope :recent, -> { order("id DESC") }
   extend Enumerize
   enumerize :status, in: [:waiting, :ac, :wa, :ce, :tle, :re]
 

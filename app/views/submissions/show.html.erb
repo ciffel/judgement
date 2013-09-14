@@ -2,11 +2,19 @@
 <div class="submission-info">
   <div class="row">
     <div class="col-lg-2">Date</div>
-    <div class="col-lg-10"><%= @submission.created_at %></div>
+    <div class="col-lg-10">
+      <%= @submission.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-2">Judged Date</div>
+    <div class="col-lg-10">
+      <%= @submission.updated_at.strftime('%Y/%m/%d %H:%M:%S') %>
+    </div>
   </div>
   <div class="row">
     <div class="col-lg-2">Verdict</div>
-    <div class="col-lg-10"><%= @submission.status %></div>
+    <div class="col-lg-10"><%= @submission.friendly_status %></div>
   </div>
   <div class="row">
     <div class="col-lg-2">Time Cost</div>

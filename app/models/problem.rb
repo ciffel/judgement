@@ -10,6 +10,6 @@ class Problem < ActiveRecord::Base
   end
 
   def passed?(user)
-    Submission.exists?(problem_id: self.id, user_id: user.id, status: :ac)
+    user && Submission.exists?(problem_id: self.id, user_id: user.id, status: :ac)
   end
 end

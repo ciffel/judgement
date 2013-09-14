@@ -2,10 +2,10 @@ class SubmissionsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_problem, only: [:new, :create]
   before_filter :set_submission, only: [:show]
-
+  before_filter :verify_is_owner, only: [:show]
 
   def index
-    @submissions = current_user.submissions.page(params[:page]).order('id DESC')
+    @submissions = current_user.submissions.page(params[:page]).recent
   end
 
   def show
@@ -50,6 +50,10 @@ class SubmissionsController < ApplicationController
 
   def set_submission
     @submission = Submission.find(params[:id])
+  end
+
+  def verify_is_owner
+    redirect_to submissions_path if @submission.user_id != current_user.id
   end
 
 end

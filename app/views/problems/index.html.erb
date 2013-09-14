@@ -13,7 +13,7 @@
     <tr class="<%= 'alert-success' if p.passed?(current_user) %>">
       <td><%= p.id %></td>
       <td><%= link_to(p.title, problem_path(p)) %></td>
-      <td><%= 'Pass' if p.passed?(current_user) %></td>
+      <td><%= 'Pass' if current_user && p.passed?(current_user) %></td>
     </tr>
     <% end %>
   </tbody>
