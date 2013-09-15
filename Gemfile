@@ -33,6 +33,7 @@ group :doc do
 end
 
 gem 'devise'
+gem 'devise-async'
 gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
                               :github => 'anjlab/bootstrap-rails'
 gem 'bootstrap_helper'
