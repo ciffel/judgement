@@ -12,7 +12,7 @@ class JudgeTask
       log.debug "#{submission.id} | #{compile_output}"
       msg = `#{Settings.sandbox_path} -i #{problem.input_path} -o #{submission.out_path} -t #{problem.time_limit} -m #{problem.mem_limit} #{submission.exec_path}`
 
-      case msg
+      case msg.strip
       when /(\d+) (\d+) (\d+)/
         submission.time_cost = $2.to_i
         submission.status = self.output_eql?(submission.out_path, problem.ans_path) ? :ac : :wa;
