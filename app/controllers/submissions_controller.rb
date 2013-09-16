@@ -5,10 +5,12 @@ class SubmissionsController < ApplicationController
   before_filter :verify_is_owner, only: [:show]
 
   def index
+    @page_title = 'Submissions'
     @submissions = current_user.submissions.page(params[:page]).recent
   end
 
   def show
+    @page_title = "Submission ##{@submission.id}"
   end
 
   def new

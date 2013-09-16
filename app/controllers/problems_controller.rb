@@ -3,10 +3,12 @@ class ProblemsController < ApplicationController
   before_filter :verify_visable, only: [:show]
 
   def index
+    @page_title = 'Problems'
     @problems = Problem.where(visible: true).all
   end
 
   def show
+    @page_title = @problem.title
   end
 
   private
