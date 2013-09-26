@@ -9,6 +9,7 @@ Judgement::Application.routes.draw do
     put 'users' => 'devise/registrations#update'
     patch 'users' => 'devise/registrations#update', :as => 'user_registration'
   end
+  get 'tutorial' => 'tutorials#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
