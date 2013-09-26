@@ -4,7 +4,7 @@ class ProblemsController < ApplicationController
 
   def index
     @page_title = 'Problems'
-    @problems = Problem.where(visible: true).all
+    @problems = Problem.where(visible: true).page(params[:page]).order("id ASC")
   end
 
   def show

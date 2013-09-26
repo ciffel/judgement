@@ -18,6 +18,7 @@
     <% end %>
   </tbody>
 </table>
+<%= will_paginate @problems, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
 <% else %>
 <p>No problems</p>
 <% end %>
