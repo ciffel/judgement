@@ -10,7 +10,8 @@
   </div>
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <%= render_list :class => "nav navbar-nav" do |li|
-      li << link_to('Problems', problems_path)
+      li << link_to('Problems',
+        current_user.try(:admin?) ? inside_problems_path : problems_path)
       li << link_to('Submissions', submissions_path)
       li << link_to('Tutorial', tutorial_path)
     end %>

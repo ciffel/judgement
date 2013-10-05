@@ -1,0 +1,26 @@
+<h1>All Problems</h1>
+<% if @problems.any? %>
+<table class="table problem-list">
+  <thead>
+    <tr>
+      <th>Problem ID</th>
+      <th>Title</th>
+      <th>Visible</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @problems.each do |p| %>
+    <tr class="<%= 'alert-success' if p.passed?(current_user) %>">
+      <td><%= p.id %></td>
+      <td><%= link_to(p.title, inside_problem_path(p)) %></td>
+      <td><%= p.visible %></td>
+      <td><%= 'Pass' if p.passed?(current_user) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @problems, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
+<% else %>
+<p>No problems</p>
+<% end %>

@@ -18,8 +18,6 @@ class ProblemsController < ApplicationController
   end
 
   def verify_visable
-    unless current_user.try(:admin?) || @problem.visible
-      redirect_to problems_path unless @problem.visible
-    end
+    redirect_to problems_path unless @problem.visible
   end
 end

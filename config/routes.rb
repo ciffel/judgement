@@ -12,7 +12,7 @@ Judgement::Application.routes.draw do
   get 'tutorial' => 'tutorials#index'
 
   namespace :inside do
-    resources :problems, only: [:index]
+    resources :problems, only: [:index, :show]
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
