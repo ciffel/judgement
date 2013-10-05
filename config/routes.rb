@@ -11,7 +11,7 @@ Judgement::Application.routes.draw do
   end
   get 'tutorial' => 'tutorials#index'
 
-  namespace :admin do
+  namespace :inside do
     resources :problems, only: [:index]
   end
   # The priority is based upon order of creation: first created -> highest priority.

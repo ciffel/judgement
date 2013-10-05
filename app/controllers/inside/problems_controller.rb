@@ -1,4 +1,4 @@
-class Admin::ProblemsController < ApplicationController
+class Inside::ProblemsController < ApplicationController
   before_filter :authenticate_admin!
 
   def index
