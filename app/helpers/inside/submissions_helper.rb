@@ -1,0 +1,2 @@
+module Inside::SubmissionsHelper
+end

@@ -14,6 +14,9 @@
         current_user.try(:admin?) ? inside_problems_path : problems_path)
       li << link_to('Submissions', submissions_path)
       li << link_to('Tutorial', tutorial_path)
+      if current_user.try(:admin?)
+        li << link_to('Live', inside_submissions_path)
+      end
     end %>
     <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>

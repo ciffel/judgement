@@ -56,7 +56,10 @@ class SubmissionsController < ApplicationController
   end
 
   def verify_is_owner
-    redirect_to submissions_path if @submission.user_id != current_user.id
+    if !current_user.admin? && @submission.user_id != current_user.id
+      flash[:error] = "You are not the owner"
+      redirect_to submissions_path
+    end
   end
 
 end

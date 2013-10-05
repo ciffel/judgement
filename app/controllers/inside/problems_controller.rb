@@ -1,4 +1,5 @@
 class Inside::ProblemsController < ApplicationController
+  include Concerns::AdminManagement
   before_filter :authenticate_admin!
   before_filter :set_problem, only: :show
 
@@ -18,8 +19,4 @@ class Inside::ProblemsController < ApplicationController
     @problem = Problem.find(params[:id])
   end
 
-  def authenticate_admin!
-    authenticate_user!
-    redirect_to problems_path unless current_user.admin?
-  end
 end
